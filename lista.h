@@ -1,46 +1,40 @@
 #ifndef LISTA_H
 #define LISTA_H
-#include "nod.h"
 #include <limits>
+#include "nod.h"
 
-using namespace std;
-class lista
-{
-	nod *first,*last;
-	int len;
+
+
+class lista{//clasa ce implementeaza o lista circulara de intregi
+
+    int len;//lungimea listei
+    nod *first,*last;//adresele primului si ultimului nod
 public:
-	lista();
-	lista(int);
-	lista(int, int);
-	lista(const lista&);
-	~lista();
+    lista();//constructorul fara parametri
+    lista(int);//constructorul cu parametri
+    lista(int,int);//constructorul cu parametri
+    lista(const lista&);//constructorul de copiere
+    ~lista();//destructorul
 
-	lista& operator=(const lista&);
+    int getLen()const;//intoarce lungimea listei
+    void ins(int,int);//introduce un nod nou in lista
+    int src(int);//cauta o valoare in lista
+    void del(int);//sterge nodul de pe o pozitie din lista
 
-	void ins(int,int);
-	int src(int);
-	void del(int);
+    lista& operator=(const lista&);//supraincarcarea operatorului =
+    friend istream& operator>>(istream&,lista&);//supraincarcarea operatorului >> pt citire
+    friend ostream& operator<<(ostream&,const lista&);//supraincarcarea operatorului << pt afisare
+    int operator[](const int)const;//supraincarcarea operatorului [] pt accesarea unui element de pe o anumita pozitie
+    lista operator+(const lista&);//supraincarcarea operatorului + pt concatenarea a doua liste
+    int operator<(const lista &);//supraincarcarea operatorului < pt compararea a doua liste dupa suma elementelor
+    int operator>(const lista &);//supraincarcarea operatorului > pt compararea a doua liste dupa suma elementelor
+    friend lista operator*(int,const lista&);//supraincarcarea operatorului * pt inmultirea tuturor elementelor unei liste cu un scalar
+    friend lista operator*(const lista&,int);//supraincarcarea operatorului * pt inmultirea tuturor elementelor unei liste cu un scalar
 
-
-    int operator[](const int p)const;
-	friend lista operator+(const lista&,const lista&);
-	friend int operator<(const lista&,const lista &);
-	friend int operator>(const lista&,const lista &);
-	friend lista operator*(int i,const lista&);
-	friend ostream& operator<<(ostream&,const lista&);
-	friend istream& operator>>(istream&,lista&);
-
-	int sum();
-    int numElem();
-    lista rev();
-    int mini();
-    int maxi();
-
-
-
-
-
-
+    int sum();//intoarce suma elementelor listei
+    lista& rev();//inverseaza ordinea elementelor in lista
+    int mini();//intoarce valoarea minima din lista
+    int maxi();//intoarce valoarea maxima din lista
 };
 
 #endif // LISTA_H
